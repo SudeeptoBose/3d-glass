@@ -35,18 +35,10 @@ const { viewport } = useThree()
   return (
     <>
         <group scale={viewport.width / 15} ref={group}{...props} dispose={null}>
-        {/* <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.BSurfaceMesh.geometry}
-            // material={materials['Material.001']}
-        >
-                        <MeshTransmissionMaterial {...materialProps}/>
-            </mesh> */}
+
             <mesh position={[0,0,1]}>
                 <torusKnotGeometry args={[1, 0.3, 300, 20]}/>
-                
-                {/* <boxGeometry args={[2,2, 2]}/> */}
+
                 
 
                 <MeshTransmissionMaterial {...materialProps}/>
