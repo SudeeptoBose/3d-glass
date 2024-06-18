@@ -15,9 +15,7 @@ function App() {
 				<directionalLight intensity={2} position={[3, 2, 3]}/>
 				<Head/>
 				<Environment preset="city" />
-				<Text font={'glasket500.otf'} position={[0, 0, 0]} fontSize={1.5}  color="white" anchorX="center" anchorY="middle">
-                	 Glass Material
-            	</Text>
+
 			</Canvas>
 		</>
 	)

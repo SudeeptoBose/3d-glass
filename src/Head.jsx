@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { MeshTransmissionMaterial, Text, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { easing } from 'maath'
 
 export function Head(props) {
@@ -24,32 +24,39 @@ export function Head(props) {
 
   })
   useFrame((state, delta)=>{
-    // group.current.rotation.z += 0.01
-    group.current.rotation.y += 0.01
-    easing.damp3(state.camera.position, [state.pointer.x, state.pointer.y, 5], 0.25, delta)
+    group.current.rotation.z += 0.015
+    // group.current.rotation.y += 0.005
+    easing.damp3(state.camera.position, [state.pointer.x*5, state.pointer.y*5, 5], 0.25, delta)
     state.camera.lookAt(0,0,0)
-    group.current.rotation.x += 0.01
+    // group.current.rotation.x += 0.005
 })
+const { viewport } = useThree()
 
   return (
-    <group ref={group}{...props} dispose={null}>
-      {/* <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.BSurfaceMesh.geometry}
-        // material={materials['Material.001']}
-      >
-                    <MeshTransmissionMaterial {...materialProps}/>
-        </mesh> */}
-        <mesh>
-            {/* <torusKnotGeometry args={[10, 3, 100, 16]}/>
-             */}
-             <boxGeometry args={[2.5,2.5, 2.5]}/>
-             
+    <>
+        <group scale={viewport.width / 15} ref={group}{...props} dispose={null}>
+        {/* <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.BSurfaceMesh.geometry}
+            // material={materials['Material.001']}
+        >
+                        <MeshTransmissionMaterial {...materialProps}/>
+            </mesh> */}
+            <mesh position={[0,0,1]}>
+                <torusKnotGeometry args={[1, 0.3, 300, 20]}/>
+                
+                {/* <boxGeometry args={[2,2, 2]}/> */}
+                
 
-            <MeshTransmissionMaterial {...materialProps}/>
-        </mesh>
-    </group>
+                <MeshTransmissionMaterial {...materialProps}/>
+            </mesh>
+            
+        </group>
+        <Text scale={viewport.width / 20}  font={'glasket500.otf'} position={[0, 0, -1]} fontSize={3}  color="white" anchorX="center" anchorY="middle">
+                	 3D Glass Material
+            	</Text>
+    </>
   )
 }
 
